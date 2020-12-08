@@ -1,0 +1,96 @@
+﻿<Popup x:Class="EverythingToolbar.SearchResultsPopup"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+       xmlns:local="clr-namespace:EverythingToolbar"
+       xmlns:properties="clr-namespace:EverythingToolbar.Properties"
+       AllowsTransparency="True"
+       mc:Ignorable="d"
+       d:DesignWidth="300"
+       d:DesignHeight="300"
+       Opened="OnOpened"
+       Closed="OnClosed"
+       StaysOpen="False"
+       IsOpen="{Binding SearchTerm,
+                        Converter={local:SearchTermToIsOpenedConverter},
+                        UpdateSourceTrigger=PropertyChanged,
+                        Mode=OneWay}"
+       Placement="{Binding taskbarEdge,
+                           Converter={local:EdgeToPlacementModeConverter},
+                           Mode=OneWay}">
+    <Border x:Name="PopupMarginBorder">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="15" Direction="-90" Opacity="0.25"  RenderingBias="Quality" ShadowDepth="-100" />
+        </Border.Effect>
+        <Border x:Name="PopupBorder"
+                BorderThickness="1"
+                BorderBrush="{DynamicResource SearchResultsViewBorder}"
+                Background="{DynamicResource SearchResultsViewHeader}">
+            <Border.RenderTransform>
+                <TranslateTransform x:Name="translateTransform" />
+            </Border.RenderTransform>
+
+            <Grid Name="ContentGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
+                <local:FilterSelector Focusable="False" />
+                
+                <local:SearchResultsView x:Name="SearchResultsView" Grid.Row="1" />
+
+                <local:SearchBox x:Name="SearchBox"
+                                 Grid.Row="2"
+                                 Height="40"
+                                 Visibility="{Binding Source={x:Static properties:Settings.Default},
+                                                      Path=isIconOnly,
+                                                      Converter={local:BoolToVisibilityConverter},
+                                                      ConverterParameter=false}" />
+
+                <Thumb Width="8"
+                       Height="8"
+                       Grid.RowSpan="3"
+                       DragStarted="OnDragStarted"
+                       DragDelta="OnDragDelta"
+                       DragCompleted="OnDragCompleted"
+                       Opacity="0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Cursor="SizeNWSE" />
+                <Thumb Width="8"
+                       Height="8"
+                       Grid.RowSpan="3"
+                       DragStarted="OnDragStarted"
+                       DragDelta="OnDragDelta"
+                       DragCompleted="OnDragCompleted"
+                       Opacity="0"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                       Cursor="SizeNESW" />
+                <Thumb Width="8"
+                       Height="8"
+                       Grid.RowSpan="3"
+                       DragStarted="OnDragStarted"
+                       DragDelta="OnDragDelta"
+                       DragCompleted="OnDragCompleted"
+                       Opacity="0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       Cursor="SizeNESW" />
+                <Thumb Width="6"
+                       Height="6"
+                       Grid.RowSpan="3"
+                       DragStarted="OnDragStarted"
+                       DragDelta="OnDragDelta"
+                       DragCompleted="OnDragCompleted"
+                       Opacity="0"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       Cursor="SizeNWSE" />
+            </Grid>
+        </Border>
+    </Border>
+</Popup>
