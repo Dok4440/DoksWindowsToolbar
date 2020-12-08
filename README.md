@@ -1,9 +1,5 @@
-EverythingToolbar
+Dok's Windows Toolbar
 =================
-
-[Everything](https://www.voidtools.com/) integration for the Windows taskbar
-
-![demo](https://user-images.githubusercontent.com/17520641/94998321-63675a00-05b1-11eb-9331-ef1fd744329e.gif)
 
 Requirements
 ------------
@@ -15,10 +11,10 @@ Requirements
 Install
 -------
 
-- Download from [releases](https://github.com/stnkl/EverythingToolbar/releases)
+- Download from [releases](/)
 - Extract it somewhere safe
 - Run the `install.cmd` as admin
-- Enable EverythingToolbar via the context menu of the taskbar
+- Enable DoksWindowsToolbar via the context menu of the taskbar
   - *Note: You might have to open the context menu twice as it not always shows up instantly.*
 
 Uninstall
